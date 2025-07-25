@@ -1,38 +1,37 @@
 function engToPongChar(char) {
   switch (char.toLowerCase()) {
-    case 'a': return "pong";
-    case 'b': return "p ong";
-    case 'c': return "po ng";
-    case 'd': return "pon g";
-    case 'e': return "p o ng";
-    case 'f': return "po n g";
-    case 'g': return "p on g";
-    case 'h': return "p o n g";
-    case 'i': return "Pong";
-    case 'j': return "Po ng";
-    case 'k': return "P ong";
-    case 'l': return "Pon g";
-    case 'm': return "P o ng";
-    case 'n': return "Po n g";
-    case 'o': return "P on g";
-    case 'p': return "P o n g";
-    case 'q': return "pOng";
-    case 'r': return "p Ong";
-    case 's': return "pO ng";
-    case 't': return "pOn g";
-    case 'u': return "p O ng";
-    case 'v': return "pO n g";
-    case 'w': return "p On g";
-    case 'x': return "p O n g";
-    case 'y': return "poNg";
-    case 'z': return "p oNg";
+    case "a": return "pong";
+    case "b": return "p ong";
+    case "c": return "po ng";
+    case "d": return "pon g";
+    case "e": return "p o ng";
+    case "f": return "po n g";
+    case "g": return "p on g";
+    case "h": return "p o n g";
+    case "i": return "Pong";
+    case "j": return "Po ng";
+    case "k": return "P ong";
+    case "l": return "Pon g";
+    case "m": return "P o ng";
+    case "n": return "Po n g";
+    case "o": return "P on g";
+    case "p": return "P o n g";
+    case "q": return "pOng";
+    case "r": return "p Ong";
+    case "s": return "pO ng";
+    case "t": return "pOn g";
+    case "u": return "p O ng";
+    case "v": return "pO n g";
+    case "w": return "p On g";
+    case "x": return "p O n g";
+    case "y": return "poNg";
+    case "z": return "p oNg";
     default: return char;
   }
 }
 
 function pongToEngChar(pong) {
   switch (pong) {
-    // Lowercase
     case "pong": return "a";
     case "p ong": return "b";
     case "po ng": return "c";
@@ -59,84 +58,54 @@ function pongToEngChar(pong) {
     case "p O n g": return "x";
     case "poNg": return "y";
     case "p oNg": return "z";
-
-    // Uppercase
-    case "ponG": return "A";
-    case "p onG": return "B";
-    case "po nG": return "C";
-    case "pon G": return "D";
-    case "p o nG": return "E";
-    case "po n G": return "F";
-    case "p on G": return "G";
-    case "p o n G": return "H";
-    case "PonG": return "I";
-    case "Po nG": return "J";
-    case "P onG": return "K";
-    case "Pon G": return "L";
-    case "P o nG": return "M";
-    case "Po n G": return "N";
-    case "P on G": return "O";
-    case "P o n G": return "P";
-    case "pOnG": return "Q";
-    case "p OnG": return "R";
-    case "pO nG": return "S";
-    case "pOn G": return "T";
-    case "p O nG": return "U";
-    case "pO n G": return "V";
-    case "p On G": return "W";
-    case "p O n G": return "X";
-    case "poNgG": return "Y";
-    case "p oNgG": return "Z";
-
     default: return pong;
   }
 }
 
 function translateEngToPong(input) {
-  let translation = "(";
-  for (let char of input) {
-    if (char === " ") {
-      translation = translation.trimEnd();
-      translation += ")(";
+  let result = "(";
+  for (let ch of input) {
+    if (ch === " ") {
+      result = result.trimEnd() + ")(";
     } else {
-      let pong = engToPongChar(char);
-      if (char >= 'A' && char <= 'Z' && pong !== char) {
-        pong = pong.slice(0, -1) + "G"; // Capitalize final 'g'
+      let pong = engToPongChar(ch);
+      if (ch >= "A" && ch <= "Z" && pong !== ch) {
+        pong = pong.slice(0, -1) + pong.slice(-1).toUpperCase();
       }
-      translation += pong + " ";
+      result += pong + " ";
     }
   }
-  return translation.trimEnd() + ")";
+  return result.trimEnd() + ")";
 }
 
 function translatePongToEng(input) {
   let translation = "";
-  let currentPong = "";
-  const valid = ["p", "o", "n", " ", "P", "O", "N", "G", "g"];
+  let current = "";
+  const valid = ["p", "o", "n", " ", "P", "O", "N"];
 
   for (let i = 0; i < input.length; i++) {
-    let ch = input[i];
+    const ch = input[i];
 
-    if (currentPong === "" && ch === " ") continue;
-
-    if (valid.includes(ch)) {
-      currentPong += ch;
+    if (current === "" && ch === " ") {
+      continue;
+    } else if (valid.includes(ch)) {
+      current += ch;
+    } else if (ch === "g") {
+      current += "g";
+      translation += pongToEngChar(current);
+      current = "";
+    } else if (ch === "G") {
+      current += "g";
+      translation += pongToEngChar(current).toUpperCase();
+      current = "";
     } else if (ch === ")") {
-      if (currentPong.trim() !== "") {
-        translation += pongToEngChar(currentPong.trim());
-        currentPong = "";
-      }
       translation += " ";
     } else if (ch !== "(") {
       translation += ch;
     }
   }
 
-  if (currentPong.trim() !== "") {
-    translation += pongToEngChar(currentPong.trim());
-  }
-
-  return translation.trim();
+  return translation;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
