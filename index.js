@@ -64,7 +64,6 @@ function pongToEngChar(pong) {
 
 function translateEngToPong(input) {
   let translation = "(";
-
   for (let char of input) {
     if (char === " ") {
       translation = translation.trimEnd();
@@ -77,7 +76,6 @@ function translateEngToPong(input) {
       translation += pong + " ";
     }
   }
-
   return translation.trimEnd() + ")";
 }
 
@@ -107,7 +105,6 @@ function translatePongToEng(input) {
       translation += ch;
     }
   }
-
   return translation;
 }
 
@@ -115,11 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const engBox = document.getElementById("eng");
   const pongBox = document.getElementById("pong");
 
-  engBox.addEventListener("input", () => {
-    pongBox.value = translateEngToPong(engBox.value);
-  });
+  if (engBox && pongBox) {
+    engBox.addEventListener("input", () => {
+      pongBox.value = translateEngToPong(engBox.value);
+    });
 
-  pongBox.addEventListener("input", () => {
-    engBox.value = translatePongToEng(pongBox.value);
-  });
+    pongBox.addEventListener("input", () => {
+      engBox.value = translatePongToEng(pongBox.value);
+    });
+  }
 });
