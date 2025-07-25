@@ -13,19 +13,19 @@
     <div class="input-container">
       <div class="input-group">
         <div class="label-frame">English</div>
-        <textarea placeholder="Input text in English..."></textarea>
+        <textarea id="eng" placeholder="Input text in English..."></textarea>
         <div class="button-group">
-          <button type="button" class="copy-button">Copy</button>
-          <button type="button" class="paste-button">Paste</button>
+          <button type="button" class="copy-button" data-target="eng">Copy</button>
+          <button type="button" class="paste-button" data-target="eng">Paste</button>
         </div>
       </div>
 
       <div class="input-group">
         <div class="label-frame">Pong</div>
-        <textarea placeholder="Input text in Pong..."></textarea>
+        <textarea id="pong" placeholder="Input text in Pong..."></textarea>
         <div class="button-group">
-          <button type="button" class="copy-button">Copy</button>
-          <button type="button" class="paste-button">Paste</button>
+          <button type="button" class="copy-button" data-target="pong">Copy</button>
+          <button type="button" class="paste-button" data-target="pong">Paste</button>
         </div>
       </div>
     </div>
@@ -43,22 +43,22 @@
   </div>
 
   <p class="disclaimer">All works linked belong to Derivakat.</p>
+
   <script src="index.js"></script>
   <script>
-    // Copy and Paste Logic
     document.querySelectorAll(".copy-button").forEach(button => {
       button.addEventListener("click", () => {
-        const targetId = button.dataset.target;
-        const target = document.getElementById(targetId);
+        const target = document.getElementById(button.dataset.target);
         target.select();
         document.execCommand("copy");
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = "Copy", 1000);
       });
     });
 
     document.querySelectorAll(".paste-button").forEach(button => {
       button.addEventListener("click", async () => {
-        const targetId = button.dataset.target;
-        const target = document.getElementById(targetId);
+        const target = document.getElementById(button.dataset.target);
         const text = await navigator.clipboard.readText();
         target.value = text;
         target.dispatchEvent(new Event("input"));
