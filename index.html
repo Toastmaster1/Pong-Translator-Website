@@ -43,5 +43,27 @@
   </div>
 
   <p class="disclaimer">All works linked belong to Derivakat.</p>
+  <script src="index.js"></script>
+  <script>
+    // ✅ Copy and Paste Logic
+    document.querySelectorAll(".copy-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const targetId = button.dataset.target;
+        const target = document.getElementById(targetId);
+        target.select();
+        document.execCommand("copy");
+      });
+    });
+
+    document.querySelectorAll(".paste-button").forEach(button => {
+      button.addEventListener("click", async () => {
+        const targetId = button.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = await navigator.clipboard.readText();
+        target.value = text;
+        target.dispatchEvent(new Event("input"));
+      });
+    });
+  </script>
 </body>
 </html>
