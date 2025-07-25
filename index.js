@@ -31,64 +31,65 @@ function engToPongChar(char) {
 }
 
 function pongToEngChar(pong) {
-  const map = {
-    "pong": "a",
-    "p ong": "b",
-    "po ng": "c",
-    "pon g": "d",
-    "p o ng": "e",
-    "po n g": "f",
-    "p on g": "g",
-    "p o n g": "h",
-    "Pong": "i",
-    "Po ng": "j",
-    "P ong": "k",
-    "Pon g": "l",
-    "P o ng": "m",
-    "Po n g": "n",
-    "P on g": "o",
-    "P o n g": "p",
-    "pOng": "q",
-    "p Ong": "r",
-    "pO ng": "s",
-    "pOn g": "t",
-    "p O ng": "u",
-    "pO n g": "v",
-    "p On g": "w",
-    "p O n g": "x",
-    "poNg": "y",
-    "p oNg": "z",
+  switch (pong) {
+    // Lowercase
+    case "pong": return "a";
+    case "p ong": return "b";
+    case "po ng": return "c";
+    case "pon g": return "d";
+    case "p o ng": return "e";
+    case "po n g": return "f";
+    case "p on g": return "g";
+    case "p o n g": return "h";
+    case "Pong": return "i";
+    case "Po ng": return "j";
+    case "P ong": return "k";
+    case "Pon g": return "l";
+    case "P o ng": return "m";
+    case "Po n g": return "n";
+    case "P on g": return "o";
+    case "P o n g": return "p";
+    case "pOng": return "q";
+    case "p Ong": return "r";
+    case "pO ng": return "s";
+    case "pOn g": return "t";
+    case "p O ng": return "u";
+    case "pO n g": return "v";
+    case "p On g": return "w";
+    case "p O n g": return "x";
+    case "poNg": return "y";
+    case "p oNg": return "z";
 
     // Uppercase
-    "ponG": "A",
-    "p onG": "B",
-    "po nG": "C",
-    "pon G": "D",
-    "p o nG": "E",
-    "po n G": "F",
-    "p on G": "G",
-    "p o n G": "H",
-    "PonG": "I",
-    "Po nG": "J",
-    "P onG": "K",
-    "Pon G": "L",
-    "P o nG": "M",
-    "Po n G": "N",
-    "P on G": "O",
-    "P o n G": "P",
-    "pOnG": "Q",
-    "p OnG": "R",
-    "pO nG": "S",
-    "pOn G": "T",
-    "p O nG": "U",
-    "pO n G": "V",
-    "p On G": "W",
-    "p O n G": "X",
-    "poNgG": "Y",
-    "p oNgG": "Z",
-  };
+    case "ponG": return "A";
+    case "p onG": return "B";
+    case "po nG": return "C";
+    case "pon G": return "D";
+    case "p o nG": return "E";
+    case "po n G": return "F";
+    case "p on G": return "G";
+    case "p o n G": return "H";
+    case "PonG": return "I";
+    case "Po nG": return "J";
+    case "P onG": return "K";
+    case "Pon G": return "L";
+    case "P o nG": return "M";
+    case "Po n G": return "N";
+    case "P on G": return "O";
+    case "P o n G": return "P";
+    case "pOnG": return "Q";
+    case "p OnG": return "R";
+    case "pO nG": return "S";
+    case "pOn G": return "T";
+    case "p O nG": return "U";
+    case "pO n G": return "V";
+    case "p On G": return "W";
+    case "p O n G": return "X";
+    case "poNgG": return "Y";
+    case "p oNgG": return "Z";
 
-  return map[pong] ?? pong;
+    default: return pong;
+  }
 }
 
 function translateEngToPong(input) {
@@ -100,7 +101,7 @@ function translateEngToPong(input) {
     } else {
       let pong = engToPongChar(char);
       if (char >= 'A' && char <= 'Z' && pong !== char) {
-        pong = pong.slice(0, -1) + "G"; // Capitalize g
+        pong = pong.slice(0, -1) + "G"; // Capitalize final 'g'
       }
       translation += pong + " ";
     }
@@ -152,4 +153,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
