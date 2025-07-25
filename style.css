@@ -24,6 +24,7 @@ form {
 .input-container {
   display: flex;
   gap: 60px;
+  justify-content: center;
 }
 
 .input-group {
@@ -155,11 +156,11 @@ textarea:focus {
   font-style: italic;
 }
 
-/* ✅ Responsive Design for Mobile */
+/* Responsive for Mobile */
 @media (max-width: 768px) {
   .input-container {
     flex-direction: column;
-    gap: 10px;
+    gap: 40px;
     align-items: center;
   }
 
