@@ -17,6 +17,7 @@
         <div class="button-group">
           <button type="button" class="copy-button" data-target="eng">Copy</button>
           <button type="button" class="paste-button" data-target="eng">Paste</button>
+          <button type="button" class="clear-button" data-target="eng">Clear</button>
         </div>
       </div>
 
@@ -26,6 +27,7 @@
         <div class="button-group">
           <button type="button" class="copy-button" data-target="pong">Copy</button>
           <button type="button" class="paste-button" data-target="pong">Paste</button>
+          <button type="button" class="clear-button" data-target="pong">Clear</button>
         </div>
       </div>
     </div>
@@ -69,6 +71,14 @@
         target.dispatchEvent(new Event("input"));
       });
     });
+
+    document.querySelectorAll(".clear-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const target = document.getElementById(button.dataset.target);
+        target.value = "";
+        target.dispatchEvent(new Event("input"));
+      })
+    })
   </script>
   <script src="index.js"></script>
 </body>
