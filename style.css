@@ -75,7 +75,8 @@ textarea:focus {
 }
 
 .copy-button,
-.paste-button {
+.paste-button,
+.clear-button {
   padding: 8px 16px;
   font-size: 14px;
   font-weight: bold;
@@ -89,7 +90,8 @@ textarea:focus {
 }
 
 .copy-button:hover,
-.paste-button:hover {
+.paste-button:hover,
+.clear-button:hover {
   background-color: #666;
 }
 
